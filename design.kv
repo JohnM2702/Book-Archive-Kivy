@@ -1,0 +1,414 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import AddingScreen driverCode.AddingScreen
+
+<ContentNavigationDrawer>:
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+
+
+    AnchorLayout:
+        anchor_x: "left"
+        size_hint_y: None
+        height: avatar.height
+
+        Image:
+            id: avatar
+            size_hint: None, None
+            size: "56dp", "56dp"
+            source: "data/logo/kivy-icon-256.png"
+
+    MDLabel:
+        text: "KivyMD library"
+        font_style: "Button"
+        adaptive_height: True
+
+    MDLabel:
+        text: "kivydevelopment@gmail.com"
+        font_style: "Caption"
+        adaptive_height: True
+
+    ScrollView:
+        MDList:
+
+            OneLineIconListItem:
+                text: "Home"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 0"
+
+                IconLeftWidget:
+                    icon: "home"
+
+            OneLineIconListItem:
+                text: "Add"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 1"
+
+                IconLeftWidget:
+                    icon: "plus"
+
+            OneLineIconListItem:
+                text: "Search"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 2"
+
+                IconLeftWidget:
+                    icon: "magnify"
+            
+            OneLineIconListItem:
+                text: "Display"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 3"
+
+                IconLeftWidget:
+                    icon: "view-carousel"
+
+            OneLineIconListItem:
+                text: "Statistics"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 4"
+
+                IconLeftWidget:
+                    icon: "chart-bar"
+
+            OneLineIconListItem:
+                text: "TBR List"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 5"
+
+                IconLeftWidget:
+                    icon: "clipboard-list-outline"
+
+<HomepageCard@MDCard>:
+    padding: 10
+    orientation: 'vertical'
+    ripple_behavior: True
+    radius: 20
+    md_bg_color: get_color_from_hex("#1a1a1a")
+    size_hint: None, None
+    size: "150dp", "180dp"
+
+<Separator@Widget>:
+    canvas:
+        Color:
+            rgb: 74/255, 183/255, 255/255
+        Rectangle:
+            pos: self.pos
+            size: self.size
+<HSeparator@Separator>:
+    size_hint_y: None
+    halign: 'center'
+    height: dp(1)
+<VSeparator@Separator>:
+    size_hint_x: None
+    width: dp(2)
+
+    
+
+
+
+MDScreen:
+    MDNavigationLayout:
+
+        ScreenManager:
+            id: screen_manager
+
+            MDScreen:
+                id: homepage
+                name: "scr 0"
+                
+                MDBoxLayout:
+                    orientation: 'vertical'
+
+                    MDToolbar:
+                        title: "Navigation Drawer"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                    
+                    MDBoxLayout:
+                        orientation: 'vertical'
+
+                        MDBoxLayout:
+                            padding: 50
+                            orientation: 'horizontal'
+
+                            MDLabel:
+                                text: "Homepage"
+                            HomepageCard:
+                                radius: 10
+                                size: "300dp", "200dp"
+
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            spacing: 10
+                            padding: 150, 50
+
+                            HomepageCard:
+                                id: cardHomeOne
+                                MDLabel:
+                                    text: "Add"
+                                    halign: 'center'
+                                    font_style: 'Subtitle1'
+                                HSeparator
+                                MDLabel:
+                                    markup: True
+                                    text: "[i]Add your book![/i]"
+                                    halign: 'center'
+                            HomepageCard:
+                                id: cardHomeTwo
+                                MDLabel:
+                                    text: "Search"
+                                    halign: 'center'
+                                    font_style: 'Subtitle1'
+                                HSeparator
+                                MDLabel:
+                                    markup: True
+                                    text: "[i]Search your collection![/i]"
+                                    halign: 'center'
+                            HomepageCard:
+                                id: cardHomeThree
+                                MDLabel:
+                                    text: "Display"
+                                    halign: 'center'
+                                    font_style: 'Subtitle1'
+                                HSeparator
+                                MDLabel:
+                                    markup: True
+                                    text: "[i]Display your collection![/i]"
+                                    halign: 'center'
+                            HomepageCard:
+                                id: cardHomeFour
+                                MDLabel:
+                                    text: "Statistics"
+                                    halign: 'center'
+                                    font_style: 'Subtitle1'
+                                HSeparator
+                                MDLabel:
+                                    markup: True
+                                    text: "[i]Check your reading stats![/i]"
+                                    halign: 'center'
+                            HomepageCard:
+                                id: cardHomeFive
+                                MDLabel:
+                                    text: "TBR List"
+                                    halign: 'center'
+                                    font_style: 'Subtitle1'
+                                HSeparator
+                                MDLabel:
+                                    markup: True
+                                    text: "[i]List your reading list![/i]"
+                                    halign: 'center'                                   
+            MDScreen:
+                name: "scr 1"
+
+                MDBoxLayout:
+                    id: mainLayoutOne
+                    orientation: 'vertical'
+
+                    MDToolbar:
+                        title: "Add"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                    MDBoxLayout:
+                        orientation: 'vertical'
+
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: 0.2
+                            padding: 20
+                            spacing: 10
+                            
+                            Button:
+                                text: "Series"
+                                size_hint_x: 0.2
+                                on_press: 
+                                    AddScreenManager.current = "s1"
+                                    AddScreenManager.transition.direction = "right"
+                                    
+
+                            Button:
+                                text: "Standalone"
+                                size_hint_x: 0.2
+                                on_press: 
+                                    AddScreenManager.current = "s2"
+                                    AddScreenManager.transition.direction = "left"
+                        ScreenManager:
+                            id: AddScreenManager
+
+                            AddingScreen:
+                                name: 's1'
+
+                                MDBoxLayout:
+                                    orientation: 'horizontal'
+                                    padding: 30
+                                    spacing: 10
+
+                                    MDCard:
+                                        orientation: 'vertical'
+                                        padding: 40
+                                        spacing: 10
+                                        radius: 20
+                                        md_bg_color: get_color_from_hex("#1a1a1a")
+
+                                        MDLabel:
+                                            id: status
+                                            halign: "center"
+                                            markup: True
+                                            text: "[i]Search the book series from the database[/i]"
+                                            theme_text_color: 'Custom'
+                                            text_color: 0, 202/255, 13/255, 0.8
+                                        MDTextField:
+                                            id: text_field
+                                            hint_text: "Search for a series/book"
+                                            icon_left: "magnify"
+                                            mode: "rectangle"
+                                        MDBoxLayout:
+                                            orientation: 'horizontal'
+
+                                            Button:
+                                                text: "Book"
+                                                on_press: 
+                                                    if app.dataFetcher(5, text_field.text): result.text = "Book found!";\
+                                                    result.text_color = 0, 202/255, 13/255, 0.8
+                                                    else: result.text = "Try Again";\
+                                                    result.text_color = 1, 0, 0
+                                            Button:
+                                                text: "Series"
+                                                on_press: 
+                                                    if app.dataFetcher(3, text_field.text): result.text = "Series found!";\
+                                                    result.text_color = 0, 202/255, 13/255, 0.8
+                                                    else: result.text = "Try Again";\
+                                                    result.text_color = 1, 0, 0
+                                        MDLabel:
+                                            id: result
+                                            halign: "center"
+                                            text: "" 
+                                            theme_text_color: 'Custom'
+                                            text_color: 0, 202/255, 13/255, 0.8
+                                    MDCard:
+                                        orientation: 'vertical'
+                                        padding: 40
+                                        radius: 20
+                                        md_bg_color: get_color_from_hex("#1a1a1a")
+
+                                        MDTextField:
+                                            id: typeTF
+                                            size_hint_x: 0.5
+                                            hint_text: "Type"
+                                        GridLayout:
+                                            rows: 4
+                                            columns: 2
+                                            spacing: 10
+
+                                            MDTextField:
+                                                id: datePickerTF
+                                                hint_text: "Duration"
+                                                on_focus: app.date_dialog.open()
+                                            MDTextField:
+                                                id: hours_spentTF
+                                                hint_text: "Hours Spent"
+                                            MDTextField:
+                                                id: seriesTF
+                                                hint_text: "Series"
+                                            MDTextField:
+                                                id: titleTF
+                                                hint_text: "Title"
+                                            MDTextField:
+                                                id: authorTF
+                                                hint_text: "Author"
+                                            MDTextField:
+                                                id: pageTF
+                                                hint_text: "Page"
+                                            Button:
+                                                text: "Submit"
+                                                colspan: 2
+                                                on_release: app.backend_affairs(0, ["typeTF", "datePickerTF", "hours_spentTF", "seriesTF", "titleTF", "authorTF", "pageTF"])
+                            Screen:
+                                name: 's2'
+
+                                MDBoxLayout:
+                                    orientation: 'horizontal'
+                                    padding: 30
+                                    spacing: 10
+
+                                    MDCard:
+                                        radius: 20
+                                        md_bg_color: get_color_from_hex("#1a1a1a")
+                                        
+                                    MDCard:
+                                        radius: 20
+                                        md_bg_color: get_color_from_hex("#1a1a1a")    
+            MDScreen:
+                name: "scr 2"
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+
+                    MDToolbar:
+                        title: "Search"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                        
+                    MDLabel:
+                        text: "Screen 2"
+                        halign: "center"
+            MDScreen:
+                name: "scr 3"
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+
+                    MDToolbar:
+                        title: "Search"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                        
+                    MDLabel:
+                        text: "Screen 3"
+                        halign: "center"
+            MDScreen:
+                name: "scr 4"
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+
+                    MDToolbar:
+                        title: "Search"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                        
+                    MDLabel:
+                        text: "Screen 4"
+                        halign: "center"
+            MDScreen:
+                name: "scr 5"
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+
+                    MDToolbar:
+                        title: "Search"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                        
+                    MDLabel:
+                        text: "Screen 5"
+                        halign: "center"    
+        
+        MDNavigationDrawer:
+            type: "modal"
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
+
+
+
+
